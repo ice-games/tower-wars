@@ -9,6 +9,10 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class MoveListener implements Listener {
 
+    /**
+     * Stops player movement in-case the game hasn't started yet.
+     * @param e the event
+     */
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
         if (TowerWarsPlugin.getInstance().getInGame().containsKey(e.getPlayer())) {

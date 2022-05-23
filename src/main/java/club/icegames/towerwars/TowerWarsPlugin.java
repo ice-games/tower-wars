@@ -49,6 +49,10 @@ public final class TowerWarsPlugin extends BasePlugin {
         Logger.log(Logger.LogLevel.SUCCESS, "Started in " + finish + "ms!");
     }
 
+    /**
+     * Registers things
+     * @param type Which thing you want to register
+     */
     public void register(RegisterType type) {
         switch (type) {
             case COMMAND:
