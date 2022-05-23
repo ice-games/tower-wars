@@ -1,6 +1,6 @@
-package club.icegames.spigotplugintemplate.core.utils;
+package club.icegames.towerwars.core.utils;
 
-import club.icegames.spigotplugintemplate.PluginTemplate;
+import club.icegames.towerwars.TowerWarsPlugin;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -15,7 +15,7 @@ public class ConfigUtils {
     }
 
     public FileConfiguration getConfig() {
-        File file = new File(PluginTemplate.getInstance().getDataFolder(), this.name + ".yml");
+        File file = new File(TowerWarsPlugin.getInstance().getDataFolder(), this.name + ".yml");
         return YamlConfiguration.loadConfiguration(file);
     }
 }
