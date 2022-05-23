@@ -3,6 +3,7 @@ package club.icegames.towerwars.game;
 import club.icegames.towerwars.TowerWarsPlugin;
 import club.icegames.towerwars.core.Locale;
 import club.icegames.towerwars.core.exeptions.NoOneLostException;
+import club.icegames.towerwars.core.exeptions.PlayerIsAlreadyInGameException;
 import club.icegames.towerwars.core.utils.Schematic;
 import club.icegames.towerwars.core.utils.database.DB;
 import club.icegames.towerwars.core.utils.database.Row;
@@ -32,7 +33,17 @@ public class Game {
     @Setter
     private GameState state;
 
-    public Game(@NotNull ArrayList<Player> players, @NotNull Team teamOne, @NotNull Team teamTwo) {
+    public Game(@NotNull ArrayList<Player> players, @NotNull Team teamOne, @NotNull Team teamTwo) throws PlayerIsAlreadyInGameException {
+
+        AtomicBoolean moveOn = new AtomicBoolean(true);
+        players.forEach(player -> {
+            if (TowerWarsPlugin.getInstance().getInGame().containsKey(player)) moveOn.set(false);
+        });
+
+        if (!moveOn.get())
+            throw new PlayerIsAlreadyInGameException("One of the current players is already in a game!");
+
+
         this.players = players;
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
@@ -77,6 +88,12 @@ public class Game {
 
     // State changers
     public void start() {
+        AtomicBoolean moveOn = new AtomicBoolean(true);
+        players.forEach(player -> {
+            if (TowerWarsPlugin.getInstance().getInGame().containsKey(player)) moveOn.set(false);
+        });
+        if (!moveOn.get()) return;
+
         Locale.GENERATING_WORLD.send(players);
         setState(GameState.GENERATING_WORLD);
         createWorld();
@@ -89,6 +106,9 @@ public class Game {
         Locale.INTRO.send(players);
 
         // TODO: Countdown
+
+        // After Countdown:
+        setState(GameState.RUNNING);
     }
     public void end(Player winner) throws NoOneLostException {
         setState(GameState.ENDED);
@@ -140,6 +160,9 @@ public class Game {
         }
         // TODO: Teleport players to spawn
     }
+
+    // TODO: Claiming Towers
+    // TODO: Arrow shooting
 
     // Schematic Utils
     private void spawnSchemtatic() {

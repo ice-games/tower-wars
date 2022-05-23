@@ -4,6 +4,7 @@ import club.icegames.towerwars.core.Locale;
 import club.icegames.towerwars.core.Logger;
 import club.icegames.towerwars.game.Game;
 import club.icegames.towerwars.game.queue.QueueWatcher;
+import club.icegames.towerwars.listeners.MoveListener;
 import games.negative.framework.BasePlugin;
 import lombok.Getter;
 import lombok.Setter;
@@ -57,7 +58,7 @@ public final class TowerWarsPlugin extends BasePlugin {
                 break;
             case LISTENER:
                 registerListeners(
-                        // Register Listeners
+                        new MoveListener()
                 );
         }
     }
