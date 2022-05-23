@@ -1,20 +1,27 @@
-package club.icegames.spigotplugintemplate;
+package club.icegames.towerwars;
 
-import club.icegames.spigotplugintemplate.core.Locale;
-import club.icegames.spigotplugintemplate.core.Logger;
-import club.icegames.spigotplugintemplate.core.license.ULicense;
-import club.icegames.spigotplugintemplate.core.utils.ConfigUtils;
+import club.icegames.towerwars.core.Locale;
+import club.icegames.towerwars.core.Logger;
+import club.icegames.towerwars.game.Game;
+import club.icegames.towerwars.game.queue.QueueWatcher;
 import games.negative.framework.BasePlugin;
 import lombok.Getter;
 import lombok.Setter;
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 
-public final class PluginTemplate extends BasePlugin {
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public final class TowerWarsPlugin extends BasePlugin {
 
     @Getter
     @Setter
-    public static PluginTemplate instance;
+    public static TowerWarsPlugin instance;
+    @Getter
+    private final HashMap<Player, Game> inGame = new HashMap<>();
+    @Getter
+    private final ArrayList<Player> queue = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -24,17 +31,15 @@ public final class PluginTemplate extends BasePlugin {
 
         setInstance(this);
 
-        FileConfiguration license = new ConfigUtils("license").getConfig();
-
-        if (!new ULicense(this, license.getString("license-key"), "https://licenses.seailz.com/api/client", "cac79c8e128cd775297fb454516b6c2c2b0cfdd9").verify()) {
-            Bukkit.getPluginManager().disablePlugin(this);
-            Bukkit.getScheduler().cancelTasks(this);
-            return;
-        }
-
         // Set details and register things
         register(RegisterType.COMMAND);
         register(RegisterType.LISTENER);
+
+        // Queue Watcher
+        new QueueWatcher(10);
+
+        // Create schematic folder
+        if (!new File(getDataFolder() + "/schematics").exists()) new File(getDataFolder() + "/schematics").mkdir();
 
         Locale.init(this);
         saveDefaultConfig();

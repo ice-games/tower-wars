@@ -1,4 +1,4 @@
-package club.icegames.spigotplugintemplate.core;
+package club.icegames.towerwars.core;
 
 import games.negative.framework.message.Message;
 import lombok.Getter;
@@ -10,15 +10,32 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-    @RequiredArgsConstructor
+@RequiredArgsConstructor
     @Getter
     public enum Locale {
 
-        ERROR_INVALID_PLAYER("error.invalidplayer", Collections.singletonList("&c&lERROR&f That player is invalid!"));
+        ERROR_INVALID_PLAYER("error.invalidplayer", Collections.singletonList("&c&lERROR&f That player is invalid!")),
+        GENERATING_WORLD("WORLD_GENERATING", listFromLines(
+                "&c&l(!) &cGame has been initialized, generating world..."
+        )),
+        WORLD_GENERATED("WORLD_GENERATED", listFromLines(
+                "&c&l(!) &cWorld generated! Pasting schematic..."
+        )),
+        SCHEMATIC_PASTED("SCHEMATIC_PASTED", listFromLines(
+                "&c&l(!) &cSchematic pasted! Teleporting..."
+        )),
+        TELEPORTED("TELEPORTED", listFromLines(
+                "&c&l(!) Teleported!"
+        )),
+        INTRO("INTRO", listFromLines(
+                "&c&l                   TOWER WARS",
+                "&7Capture all the towers by standing on their &egold block&7 for 7 seconds!",
+                "         &7First one to capture all the towers wins!",
+                " &7Beware of the big towers, once captured they will start attacking the other",
+                "&7             team with arrows! Good luck..."
+        ));
 
         private final String id;
         private final List<String> defaultMessage;
@@ -71,4 +88,9 @@ import java.util.List;
         public Message replace(Object o1, Object o2) {
             return message.replace((String) o1, (String) o2);
         }
+
+        public static List<String> listFromLines(String... s) {
+            return new ArrayList<>(List.of(s));
+        }
+
     }

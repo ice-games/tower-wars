@@ -1,4 +1,4 @@
-package club.icegames.spigotplugintemplate.core;
+package club.icegames.towerwars.core;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
