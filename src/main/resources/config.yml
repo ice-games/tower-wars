@@ -1,0 +1,8 @@
+# Required for the web tracker
+mysql:
+  enabled: false
+  ip: "panel.seailz.com"
+  port: "3306"
+  name: "a_good_old_database"
+  password: "seailz"
+  username: "not_seailz"

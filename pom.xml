@@ -51,7 +51,11 @@
                     <relocations>
                         <relocation>
                             <pattern>games.negative.framework</pattern>
-                            <shadedPattern>com.seailz.icecore.core.framework</shadedPattern>
+                            <shadedPattern>club.icegames.towerwars.core.utils</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>ez</pattern>
+                            <shadedPattern>club.icegames.towerwars.core.utils</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
@@ -67,12 +71,12 @@
 
     <repositories>
         <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
             <id>enginehub-maven</id>
@@ -81,34 +85,62 @@
     </repositories>
 
     <dependencies>
+        <!--- SPIGOT API -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.18.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <!--- FRAMEWORK -->
         <dependency>
             <groupId>com.github.Negative-Games</groupId>
             <artifactId>Framework</artifactId>
             <version>2.2.0-BETA</version>
             <scope>compile</scope>
         </dependency>
+        <!--- LOMBOK <3 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.24</version>
             <scope>compile</scope>
         </dependency>
+        <!--- FILE UTILS -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>31.0.1-jre</version>
         </dependency>
+        <!--- W/E API -->
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>
             <version>6.1.4-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <!--- ANNOTATIONS -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--- MORE FILE UTILS -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>Mythic-Dist</artifactId>
+            <version>5.0.3-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.27</version>
         </dependency>
     </dependencies>
 </project>
