@@ -1,6 +1,7 @@
 package club.icegames.towerwars.game.queue;
 
 import club.icegames.towerwars.TowerWarsPlugin;
+import club.icegames.towerwars.core.exeptions.PlayerIsAlreadyInGameException;
 import club.icegames.towerwars.game.Game;
 import club.icegames.towerwars.game.Team;
 import org.bukkit.Bukkit;
@@ -27,9 +28,13 @@ public class QueueWatcher {
                 TowerWarsPlugin.getInstance().getQueue().remove(0);
                 TowerWarsPlugin.getInstance().getQueue().remove(1);
 
-                new Game(
-                        players, blue, red
-                ).start();
+                try {
+                    new Game(
+                            players, blue, red
+                    ).start();
+                } catch (PlayerIsAlreadyInGameException e) {
+                    e.printStackTrace();
+                }
             }
         }, delay, delay);
     }

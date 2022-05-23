@@ -51,6 +51,10 @@ public class Game {
         state = GameState.ENDED;
     }
 
+    /**
+     * Teleports all players to the correct location
+     * @author Seailz
+     */
     private void teleport() {
         Location loc = new Location(getWorld(), 0, 0, 0);
         int
@@ -76,17 +80,33 @@ public class Game {
     }
 
     // World Utils
+
+    /**
+     * Creates the world for the game
+     * @author Seailz
+     */
     private void createWorld() {
         WorldCreator wc = new WorldCreator(getUuid().toString());
         wc.type(WorldType.FLAT);
         wc.generatorSettings("2;0;1;");
         setWorld(wc.createWorld());
     }
+
+    /**
+     * Deletes the world after the game is finished
+     * @author Seailz
+     * @throws IOException if the world folder doesn't exist
+     */
     private void deleteWorld() throws IOException {
         FileUtils.deleteDirectory(new File(getWorld().getName()));
     }
 
     // State changers
+
+    /**
+     * Starts the game
+     * @author Seailz
+     */
     public void start() {
         AtomicBoolean moveOn = new AtomicBoolean(true);
         players.forEach(player -> {
@@ -110,6 +130,13 @@ public class Game {
         // After Countdown:
         setState(GameState.RUNNING);
     }
+
+    /**
+     * Ends the game
+     * @author Seailz
+     * @param winner the winner of the game
+     * @throws NoOneLostException if no-one lost
+     */
     public void end(Player winner) throws NoOneLostException {
         setState(GameState.ENDED);
         try {
@@ -165,6 +192,11 @@ public class Game {
     // TODO: Arrow shooting
 
     // Schematic Utils
+
+    /**
+     * Pastes a random schematic
+     * @author Seailz
+     */
     private void spawnSchemtatic() {
         File folder = new File(TowerWarsPlugin.getInstance().getDataFolder() + "/schematics");
         ArrayList<File> schematics = new ArrayList<>();
@@ -178,18 +210,46 @@ public class Game {
 
         Schematic.paste(removeExtension(schematic), loc);
     }
+
+    /**
+     * Gets the file extension
+     * @param filename the name of the file
+     * @return the file extension
+     * @author Seailz
+     */
     private Optional<String> getFileExtension(String filename) {
         return Optional.ofNullable(filename)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
     }
+
+    /**
+     * Checks if a file is a schematic
+     * @param file the file you want to check
+     * @return if the file is a schematic
+     * @author Seailz
+     */
     private boolean isSchematic(File file) {
         return (getFileExtension(file.getName()).get().equalsIgnoreCase("schem") || getFileExtension(file.getName()).get().equalsIgnoreCase("schematic"));
     }
+
+    /**
+     * Picks a random object from an Array
+     * @param array the arraylist
+     * @return a random object from inside that array
+     * @author Seailz
+     */
     private Object getRandomFromArray(ArrayList<?> array) {
         int rnd = new Random().nextInt(array.size());
         return array.get(rnd);
     }
+
+    /**
+     * Removes the .schem or .schematic extension from a file
+     * @param file the file
+     * @return a string without the extension
+     * @author Seailz
+     */
     private String removeExtension(File file) {
         return file.getName().replaceAll(".schem", "").replaceAll(".schematic", "");
     }
