@@ -14,6 +14,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * @author Seailz
+ */
 public final class TowerWarsPlugin extends BasePlugin {
 
     @Getter
@@ -72,6 +75,13 @@ public final class TowerWarsPlugin extends BasePlugin {
         // Plugin shutdown logic
     }
 
-
-    public enum RegisterType {COMMAND, LISTENER}
+    /**
+     * Checks if a player is in a game
+     * @param p The player you wish to check
+     * @return A boolean defining whether the player is in a game.
+     */
+    public boolean inGame(Player p) {
+        return inGame.containsKey(p);
+    }
+    private enum RegisterType {COMMAND, LISTENER}
 }

@@ -3,13 +3,16 @@ package club.icegames.towerwars.game.queue;
 import club.icegames.towerwars.TowerWarsPlugin;
 import club.icegames.towerwars.core.exeptions.PlayerIsAlreadyInGameException;
 import club.icegames.towerwars.game.Game;
-import club.icegames.towerwars.game.Team;
+import club.icegames.towerwars.game.SingleTeam;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
+/**
+ * @author Seailz
+ */
 public class QueueWatcher {
 
     public QueueWatcher(int delay) {
@@ -19,8 +22,8 @@ public class QueueWatcher {
                 players.add(TowerWarsPlugin.getInstance().getQueue().get(0));
                 players.add(TowerWarsPlugin.getInstance().getQueue().get(1));
 
-                Team blue = new Team(players.get(0), ChatColor.BLUE);
-                Team red = new Team(players.get(1), ChatColor.RED);
+                SingleTeam blue = new SingleTeam(players.get(0), ChatColor.BLUE);
+                SingleTeam red = new SingleTeam(players.get(1), ChatColor.RED);
 
                 // Remove the players from the queue
                 TowerWarsPlugin.getInstance().getQueue().remove(0);

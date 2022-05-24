@@ -7,6 +7,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+/**
+ * @author Seailz
+ */
 public class MoveListener implements Listener {
 
     /**
