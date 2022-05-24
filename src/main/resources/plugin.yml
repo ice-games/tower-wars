@@ -1,7 +1,7 @@
-name: SpigotPluginTemplate
+name: TowerWars
 version: ${project.version}
-main: com.seailz.spigotplugintemplate.SpigotPluginTemplate
+main: club.icegames.towerwars.TowerWarsPlugin
 api-version: 1.18
 authors: [ Seailz ]
-description: Plugin Tempalte (Change this!)
-website: www.seailzcom
+description: Tower Wars Plugin
+website: www.seailz.com
