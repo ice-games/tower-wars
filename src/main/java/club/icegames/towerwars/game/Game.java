@@ -11,9 +11,12 @@ import club.icegames.towerwars.core.utils.database.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FileUtils;
-import org.bukkit.*;
-import org.bukkit.entity.Player;
 import club.icegames.towerwars.core.*;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
+import org.bukkit.WorldType;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
