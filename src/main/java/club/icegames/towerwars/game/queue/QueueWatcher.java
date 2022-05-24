@@ -22,7 +22,7 @@ public class QueueWatcher {
                 players.add(TowerWarsPlugin.getInstance().getQueue().get(1));
 
                 Team blue = new Team(players.get(0), ChatColor.BLUE);
-                Team red = new Team(players.get(0), ChatColor.RED);
+                Team red = new Team(players.get(1), ChatColor.RED);
 
                 // Remove the players from the queue
                 TowerWarsPlugin.getInstance().getQueue().remove(0);
