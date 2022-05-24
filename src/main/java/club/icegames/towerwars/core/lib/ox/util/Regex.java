@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import com.google.common.collect.Maps;
 
-import ox.x.XList;
+import club.icegames.towerwars.core.lib.ox.x.XList;
 
 public class Regex {
 

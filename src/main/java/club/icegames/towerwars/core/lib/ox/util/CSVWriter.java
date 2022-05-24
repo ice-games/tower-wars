@@ -1,6 +1,6 @@
 package club.icegames.towerwars.core.lib.ox.util;
 
-import static ox.util.Utils.propagate;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.propagate;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;

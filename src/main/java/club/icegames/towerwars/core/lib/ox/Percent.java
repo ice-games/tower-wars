@@ -1,7 +1,7 @@
 package club.icegames.towerwars.core.lib.ox;
 
 import static com.google.common.base.Preconditions.checkState;
-import static ox.util.Utils.isNullOrEmpty;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.isNullOrEmpty;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

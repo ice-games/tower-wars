@@ -1,27 +1,20 @@
 package club.icegames.towerwars.core.lib.ox;
 
-import static com.google.common.base.Preconditions.checkState;
-import static ox.util.Functions.map;
-import static ox.util.Utils.getExtension;
-import static ox.util.Utils.propagate;
+import club.icegames.towerwars.core.lib.ox.x.XList;
+import com.google.common.base.Predicate;
+import com.google.common.hash.Hashing;
+import com.google.common.io.Files;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.StandardCopyOption;
 import java.util.function.Consumer;
 
-import com.google.common.base.Predicate;
-import com.google.common.hash.Hashing;
-import com.google.common.io.Files;
-
-import ox.x.XList;
+import static com.google.common.base.Preconditions.checkState;
+import static club.icegames.towerwars.core.lib.ox.util.Functions.map;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.getExtension;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.propagate;
 
 public class File {
 

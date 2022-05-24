@@ -1,6 +1,6 @@
 package club.icegames.towerwars.core.lib.ox;
 
-import static ox.util.Utils.propagate;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.propagate;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -14,8 +14,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
-import ox.util.SplitOutputStream;
-import ox.util.Time;
+import club.icegames.towerwars.core.lib.ox.util.SplitOutputStream;
+import club.icegames.towerwars.core.lib.ox.util.Time;
 
 public class Log {
 

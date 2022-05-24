@@ -1,30 +1,22 @@
 package club.icegames.towerwars.core.lib.ox;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static ox.util.Utils.normalize;
-import static ox.util.Utils.propagate;
+import club.icegames.towerwars.core.lib.ox.util.CSVReader;
+import com.google.common.base.Charsets;
+import com.google.common.io.ByteStreams;
 
-import java.awt.Font;
-import java.awt.Toolkit;
+import javax.imageio.ImageIO;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,16 +27,10 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipInputStream;
 
-import javax.imageio.ImageIO;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.normalize;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.propagate;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.ByteStreams;
-
-import ox.util.CSVReader;
 
 public class IO {
 

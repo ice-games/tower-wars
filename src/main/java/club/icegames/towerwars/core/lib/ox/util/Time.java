@@ -1,7 +1,7 @@
 package club.icegames.towerwars.core.lib.ox.util;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static ox.util.Utils.isNullOrEmpty;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.isNullOrEmpty;
 
 import java.time.Instant;
 import java.time.LocalDate;

@@ -16,8 +16,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ForwardingList;
 import com.google.common.collect.Lists;
 
-import ox.Log;
-import ox.util.Functions;
+import club.icegames.towerwars.core.lib.ox.Log;
+import club.icegames.towerwars.core.lib.ox.util.Functions;
 
 /**
  * <p>

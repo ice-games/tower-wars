@@ -1,12 +1,12 @@
 package club.icegames.towerwars.core.lib.ox;
 
-import static com.google.common.base.Preconditions.checkState;
-import static ox.util.Utils.propagate;
-
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+
+import static com.google.common.base.Preconditions.checkState;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.propagate;
 
 public final class OS {
   public static enum OS_Type {
@@ -102,11 +102,11 @@ public final class OS {
   }
 
   public static long getFreeDiskSpace() {
-    return ox.File.home().file.getUsableSpace();
+    return club.icegames.towerwars.core.lib.ox.File.home().file.getUsableSpace();
   }
 
   public static long getTotalDiskSpace() {
-    return ox.File.home().file.getTotalSpace();
+    return club.icegames.towerwars.core.lib.ox.File.home().file.getTotalSpace();
   }
 
   public static void open(File file) {

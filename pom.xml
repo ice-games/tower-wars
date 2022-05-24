@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.seailz</groupId>
-    <artifactId>SpigotPluginTemplate</artifactId>
+    <groupId>club.icegames</groupId>
+    <artifactId>TowerWars</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>SpigotPluginTemplate</name>
+    <name>TowerWars</name>
 
-    <description>Plugin Template (Change this!)</description>
+    <description>TowerWars minigame</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -141,6 +141,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.27</version>
+        </dependency>
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <version>3.2</version>
         </dependency>
     </dependencies>
 </project>

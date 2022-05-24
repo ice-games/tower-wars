@@ -11,7 +11,7 @@ import java.util.Set;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableSet;
 
-import ox.Log;
+import club.icegames.towerwars.core.lib.ox.Log;
 
 public class Images {
 
