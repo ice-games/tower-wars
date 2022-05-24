@@ -30,10 +30,9 @@ import com.sk89q.worldedit.session.ClipboardHolder;
  *         schematics. (Built against WorldEdit 6.1)
  *
  */
-
-@SuppressWarnings("deprecation")
 public class Schematic {
 
+    /*
     public static void save(Player player, String schematicName) {
         try {
             File schematic = new File(TowerWarsPlugin.getInstance().getDataFolder(), "/schematics/" + schematicName);
@@ -59,12 +58,10 @@ public class Schematic {
             editSession.flushQueue();
 
             player.sendMessage("Saved schematic!");
-        } catch (IOException | DataException ex) {
-            ex.printStackTrace();
-        } catch (EmptyClipboardException ex) {
+        } catch (IOException | DataException | EmptyClipboardException ex) {
             ex.printStackTrace();
         }
-    }
+    } */
 
 
     public static void paste(String schematicName, Location pasteLoc) {

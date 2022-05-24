@@ -4,10 +4,12 @@ import club.icegames.towerwars.TowerWarsPlugin;
 import club.icegames.towerwars.core.Locale;
 import club.icegames.towerwars.core.exeptions.NoOneLostException;
 import club.icegames.towerwars.core.exeptions.PlayerIsAlreadyInGameException;
+import club.icegames.towerwars.core.utils.Countdown;
 import club.icegames.towerwars.core.utils.Schematic;
 import club.icegames.towerwars.core.utils.database.DB;
 import club.icegames.towerwars.core.utils.database.Row;
 import club.icegames.towerwars.core.utils.database.Table;
+import games.negative.framework.util.Task;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FileUtils;
@@ -128,10 +130,11 @@ public class Game {
         teleport();
         Locale.INTRO.send(players);
 
-        // TODO: Countdown
+        new Countdown(teamOne.getPlayer());
+        new Countdown(teamTwo.getPlayer());
 
         // After Countdown:
-        setState(GameState.RUNNING);
+        Task.asyncDelayed(TowerWarsPlugin.getInstance(), 100, () -> setState(GameState.RUNNING));
     }
 
     /**
@@ -203,6 +206,11 @@ public class Game {
     private void spawnSchemtatic() {
         File folder = new File(TowerWarsPlugin.getInstance().getDataFolder() + "/schematics");
         ArrayList<File> schematics = new ArrayList<>();
+
+        if (folder.listFiles() == null) {
+            Logger.log(Logger.LogLevel.ERROR, "No schematics detected!");
+            return;
+        }
 
         Arrays.stream(folder.listFiles()).forEach(file -> {
             if (isSchematic(file)) schematics.add(file);

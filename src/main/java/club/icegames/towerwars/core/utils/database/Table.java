@@ -1,32 +1,19 @@
 package club.icegames.towerwars.core.utils.database;
 
+import club.icegames.towerwars.core.lib.ox.Json;
+import club.icegames.towerwars.core.lib.ox.Money;
+import club.icegames.towerwars.core.lib.ox.Percent;
+import club.icegames.towerwars.core.lib.ox.Reflection;
+import club.icegames.towerwars.core.lib.ox.x.XList;
+import com.google.common.collect.*;
+
+import java.time.*;
+import java.util.*;
+import java.util.Map.Entry;
+
+import static club.icegames.towerwars.core.lib.ox.util.Functions.map;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
-import static ox.util.Functions.map;
-
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.UUID;
-
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
-import ox.Json;
-import ox.Money;
-import ox.Percent;
-import ox.Reflection;
-import ox.x.XList;
 
 public class Table {
 
@@ -212,12 +199,12 @@ public class Table {
     return row;
   }
 
-  public XList<Row> toRows(Iterable<?> list) {
+  public List<String> toRows(Iterable<?> list) {
     return map(list, this::toRow);
   }
 
   public <T> XList<T> fromRows(Collection<Row> rows, Class<T> c) {
-    return map(rows, row -> fromRow(row, c));
+    return (XList<T>) map(rows, row -> fromRow(row, c));
   }
 
   public <T> T fromRow(Row row, Class<T> c) {
