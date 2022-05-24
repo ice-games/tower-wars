@@ -3,6 +3,9 @@ package club.icegames.towerwars.core;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
+/**
+ * @author joeecodes
+ */
 public class Logger {
 
     /**

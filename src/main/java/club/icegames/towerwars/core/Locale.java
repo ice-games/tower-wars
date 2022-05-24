@@ -12,6 +12,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.*;
 
+/**
+ * @author joeecodes
+ */
 @RequiredArgsConstructor
     @Getter
     public enum Locale {
@@ -27,7 +30,7 @@ import java.util.*;
                 "&c&l(!) &cSchematic pasted! Teleporting..."
         )),
         TELEPORTED("TELEPORTED", listFromLines(
-                "&c&l(!) Teleported!"
+                "&c&l(!) &cTeleported!"
         )),
         INTRO("INTRO", listFromLines(
                 "&c&l                   TOWER WARS",
@@ -35,6 +38,9 @@ import java.util.*;
                 "         &7First one to capture all the towers wins!",
                 " &7Beware of the big towers, once captured they will start attacking the other",
                 "&7             team with arrows! Good luck..."
+        )),
+        PLAYER_DEATH("PLAYER_DEATH", listFromLines(
+                "&c&l(!) &c%player% just died!"
         ));
 
         private final String id;

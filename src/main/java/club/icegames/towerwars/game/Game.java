@@ -14,10 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.io.FileUtils;
 import club.icegames.towerwars.core.*;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,19 +23,22 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * @author Seailz
+ */
 @Getter
 public class Game {
 
     private final ArrayList<Player> players;
-    private final Team teamOne;
-    private final Team teamTwo;
+    private final SingleTeam teamOne;
+    private final SingleTeam teamTwo;
     @Setter
     private World world;
     private final UUID uuid;
     @Setter
     private GameState state;
 
-    public Game(@NotNull ArrayList<Player> players, @NotNull Team teamOne, @NotNull Team teamTwo) throws PlayerIsAlreadyInGameException {
+    public Game(@NotNull ArrayList<Player> players, @NotNull SingleTeam teamOne, @NotNull SingleTeam teamTwo) throws PlayerIsAlreadyInGameException {
 
         AtomicBoolean moveOn = new AtomicBoolean(true);
         players.forEach(player -> {
@@ -265,4 +265,18 @@ public class Game {
         return file.getName().replaceAll(".schem", "").replaceAll(".schematic", "");
     }
 
+    public void kill(Team team) {
+        boolean teamOne = team.equals(Team.ONE);
+        Player p = teamOne ? getTeamOne().getPlayer() : getTeamTwo().getPlayer();
+        SingleTeam t = teamOne ? getTeamOne() : getTeamTwo();
+
+        t.setLives(t.getLives() - 1);
+
+        Locale.PLAYER_DEATH.replace("%player%", p.getName()).send(this.teamOne.getPlayer());
+        Locale.PLAYER_DEATH.replace("%player%", p.getName()).send(this.teamTwo.getPlayer());
+
+        p.setGameMode(GameMode.CREATIVE);
+    }
+
+    public enum Team {ONE, TWO;}
 }
