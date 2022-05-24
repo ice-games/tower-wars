@@ -9,7 +9,7 @@ import com.google.common.base.Functions;
 import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.Maps;
 
-import ox.Log;
+import club.icegames.towerwars.core.lib.ox.Log;
 
 public class XMap<K, V> extends ForwardingMap<K, V> {
 

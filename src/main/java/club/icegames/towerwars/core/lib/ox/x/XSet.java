@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 import com.google.common.collect.ForwardingSet;
 import com.google.common.collect.Sets;
 
-import ox.Log;
-import ox.util.Utils;
+import club.icegames.towerwars.core.lib.ox.Log;
+import club.icegames.towerwars.core.lib.ox.util.Utils;
 
 public class XSet<T> extends ForwardingSet<T> {
 

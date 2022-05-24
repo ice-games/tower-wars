@@ -1,7 +1,7 @@
 package club.icegames.towerwars.core.lib.ox;
 
-import static ox.util.Utils.first;
-import static ox.util.Utils.propagate;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.first;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.propagate;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -34,9 +34,9 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.reflect.TypeToken;
 
-import ox.util.Utils;
-import ox.x.XList;
-import ox.x.XOptional;
+import club.icegames.towerwars.core.lib.ox.util.Utils;
+import club.icegames.towerwars.core.lib.ox.x.XList;
+import club.icegames.towerwars.core.lib.ox.x.XOptional;
 import sun.misc.Unsafe;
 
 public class Reflection {

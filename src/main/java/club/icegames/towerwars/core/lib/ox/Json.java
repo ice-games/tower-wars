@@ -1,14 +1,11 @@
 package club.icegames.towerwars.core.lib.ox;
 
-import static ox.util.Functions.map;
-import static ox.util.Utils.isNullOrEmpty;
-import static ox.util.Utils.parseEnum;
-
 import java.io.Reader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -24,7 +21,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
-import ox.x.XList;
+import club.icegames.towerwars.core.lib.ox.x.XList;
+
+import static club.icegames.towerwars.core.lib.ox.util.Functions.map;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.isNullOrEmpty;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.parseEnum;
 
 public class Json implements Iterable<String> {
 
@@ -343,26 +344,26 @@ public class Json implements Iterable<String> {
   }
 
   public XList<String> asStringArray() {
-    return map(arr(), e -> e.isJsonNull() ? null : e.getAsString());
+    return (XList<String>) map(arr(), e -> e.isJsonNull() ? null : e.getAsString());
   }
 
-  public XList<Integer> asIntArray() {
+  public List<String> asIntArray() {
     return map(arr(), JsonElement::getAsInt);
   }
 
-  public XList<Long> asLongArray() {
+  public List<String> asLongArray() {
     return map(arr(), JsonElement::getAsLong);
   }
 
-  public XList<Float> asFloatArray() {
+  public List<String> asFloatArray() {
     return map(arr(), j -> j.isJsonNull() ? null : j.getAsFloat());
   }
 
-  public XList<Double> asDoubleArray() {
+  public List<String> asDoubleArray() {
     return map(arr(), j -> j.isJsonNull() ? null : j.getAsDouble());
   }
 
-  public XList<Json> asJsonArray() {
+  public List<String> asJsonArray() {
     return map(arr(), Json::new);
   }
 

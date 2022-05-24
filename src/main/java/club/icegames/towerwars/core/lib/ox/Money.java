@@ -1,8 +1,8 @@
 package club.icegames.towerwars.core.lib.ox;
 
-import static ox.util.Utils.format;
-import static ox.util.Utils.isNullOrEmpty;
-import static ox.util.Utils.signum;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.format;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.isNullOrEmpty;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.signum;
 
 import java.math.BigDecimal;
 import java.util.function.Function;
@@ -10,7 +10,7 @@ import java.util.function.Function;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Functions;
 
-import ox.util.Utils;
+import club.icegames.towerwars.core.lib.ox.util.Utils;
 
 public class Money implements Comparable<Money> {
 

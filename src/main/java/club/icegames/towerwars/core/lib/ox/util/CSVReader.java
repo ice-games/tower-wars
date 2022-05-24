@@ -1,7 +1,7 @@
 package club.icegames.towerwars.core.lib.ox.util;
 
 import static com.google.common.base.Preconditions.checkState;
-import static ox.util.Utils.propagate;
+import static club.icegames.towerwars.core.lib.ox.util.Utils.propagate;
 
 import java.io.BufferedReader;
 import java.io.IOException;

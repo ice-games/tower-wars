@@ -35,10 +35,10 @@ import com.google.common.base.Optional;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 
-import ox.Log;
-import ox.Money;
-import ox.Percent;
-import ox.x.XList;
+import club.icegames.towerwars.core.lib.ox.Log;
+import club.icegames.towerwars.core.lib.ox.Money;
+import club.icegames.towerwars.core.lib.ox.Percent;
+import club.icegames.towerwars.core.lib.ox.x.XList;
 
 public class Utils {
 

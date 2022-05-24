@@ -10,7 +10,7 @@ import com.google.common.collect.ForwardingMultimap;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 
-import ox.Log;
+import club.icegames.towerwars.core.lib.ox.Log;
 
 public class XMultimap<K, V> extends ForwardingMultimap<K, V> {
 

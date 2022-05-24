@@ -1,32 +1,27 @@
 package club.icegames.towerwars.core.lib.ox.util;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.collect.Iterables.size;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
+import club.icegames.towerwars.core.lib.ox.x.XList;
+import club.icegames.towerwars.core.lib.ox.x.XMap;
+import club.icegames.towerwars.core.lib.ox.x.XMultimap;
+import club.icegames.towerwars.core.lib.ox.x.XSet;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 
-import ox.x.XList;
-import ox.x.XMap;
-import ox.x.XMultimap;
-import ox.x.XSet;
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.collect.Iterables.size;
 
 public final class Functions {
 
   public static <A, B> XList<B> map(A[] array, Function<A, B> function) {
-    return map(Arrays.asList(array), function);
+    return (XList<B>) map(Arrays.asList(array), function);
   }
 
   public static <A, B> List<String> map(Iterable<A> input, Function<A, B> function) {
@@ -37,7 +32,7 @@ public final class Functions {
     for (A element : input) {
       ret.add(function.apply(element));
     }
-    return ret;
+    return (List<String>) ret;
   }
 
   public static <A, B> XSet<B> toSet(Iterable<A> input, Function<A, B> function) {
