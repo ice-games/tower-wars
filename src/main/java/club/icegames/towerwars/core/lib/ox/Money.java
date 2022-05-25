@@ -181,9 +181,9 @@ public class Money implements Comparable<Money> {
 
     long n = Math.round(d);
 
-    if (s.charAt(0) == '-' || s.charAt(0) == '–' || s.charAt(0) == '(') {
+    /*if (s.charAt(0) == '-' || s.charAt(0) == '–' || s.charAt(0) == '(') {
       n = -n;
-    }
+    }*/
 
     return new Money(n);
   }

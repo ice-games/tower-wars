@@ -315,7 +315,7 @@ public class Reflection {
     }
   }
 
-  /**
+  /*
    * For example:<br>
    * public abstract class AbstractDB<T><br>
    * public class UserDB extends AbstractDB<User> <br>

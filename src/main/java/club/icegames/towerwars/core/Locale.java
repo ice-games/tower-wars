@@ -48,6 +48,9 @@ import java.util.*;
         SET_LIVES("SET_LIVES", listFromLines(
                 "&c&l(!)&c Successfully set lives!"
         )),
+        SET_TIME("SET_TIME", listFromLines(
+                "&c&l(!)&c Successfully set capture time"
+        )),
         INVALID_PLAYER("INVALID_PLAYER", listFromLines(
                 "&c&l(!)&c Invalid player!"
         ));

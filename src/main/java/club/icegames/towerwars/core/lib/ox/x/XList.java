@@ -19,7 +19,7 @@ import com.google.common.collect.Lists;
 import club.icegames.towerwars.core.lib.ox.Log;
 import club.icegames.towerwars.core.lib.ox.util.Functions;
 
-/**
+/*
  * <p>
  * This class offers methods similar to those in Java's Stream API. This class offers convenience at the cost of
  * performance. 99.9% of the time, this performance difference will not matter and this class will be a superior
@@ -165,7 +165,7 @@ public class XList<T> extends ForwardingList<T> {
     return Functions.toSet(this, function);
   }
 
-  /**
+  /*
    * @exception if the set of values of {@code function} does not have exactly one element.
    * @return the unique value obtained from applying the function to the elements in this list.
    */

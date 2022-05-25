@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SettingsMainGUI extends GUI {
     public SettingsMainGUI(@NotNull String title, int rows) {
-        super(title, rows);
+        super(title, rows, false);
 
         ItemStack settings = CustomSkull.of("https://textures.minecraft.net/texture/ec2ff244dfc9dd3a2cef63112e7502dc6367b0d02132950347b2b479a72366dd").getItemStack();
         ItemMeta meta = settings.getItemMeta();
@@ -27,7 +27,7 @@ public class SettingsMainGUI extends GUI {
         );
         settings.setItemMeta(meta);
 
-        this.setItemClickEvent(12, player -> settings, (player, event) -> {
+        this.setItemClickEvent(13, player -> settings, (player, event) -> {
             new SettingsGUI("&7&lSettings", 3).open(player);
         });
 

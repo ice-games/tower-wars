@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @Getter
 public class Game {
 
-    private final ArrayList<Player> players;
+    private final ArrayList<Player> players = new ArrayList<>();
     private final SingleTeam teamOne;
     private final SingleTeam teamTwo;
     @Setter
@@ -38,18 +38,22 @@ public class Game {
     @Setter
     private GameState state;
 
-    public Game(@NotNull ArrayList<Player> players, @NotNull SingleTeam teamOne, @NotNull SingleTeam teamTwo) throws PlayerIsAlreadyInGameException {
+    public Game(@NotNull SingleTeam teamOne, @NotNull SingleTeam teamTwo) throws PlayerIsAlreadyInGameException {
 
         AtomicBoolean moveOn = new AtomicBoolean(true);
+
+        players.add(teamOne.getPlayer());
+        players.add(teamTwo.getPlayer());
+
         players.forEach(player -> {
             if (TowerWarsPlugin.getInstance().getInGame().containsKey(player)) moveOn.set(false);
+            players.add(player);
         });
 
         if (!moveOn.get())
             throw new PlayerIsAlreadyInGameException("One of the current players is already in a game!");
 
 
-        this.players = players;
         this.teamOne = teamOne;
         this.teamTwo = teamTwo;
         uuid = UUID.randomUUID();
