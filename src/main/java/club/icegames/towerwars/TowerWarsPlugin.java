@@ -1,5 +1,6 @@
 package club.icegames.towerwars;
 
+import club.icegames.towerwars.commands.main.CommandTowerWars;
 import club.icegames.towerwars.core.Locale;
 import club.icegames.towerwars.core.Logger;
 import club.icegames.towerwars.game.Game;
@@ -71,6 +72,7 @@ public final class TowerWarsPlugin extends BasePlugin {
             case COMMAND:
                 registerCommands(
                         // Insert commands
+                        new CommandTowerWars()
                 );
                 break;
             case LISTENER:
