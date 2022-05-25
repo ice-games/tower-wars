@@ -99,6 +99,7 @@ public final class TowerWarsPlugin extends BasePlugin {
     public void refresh() {
         setLives(getConfig().getInt("game.lives"));
         setTowerCaptureTime(getConfig().getInt("game.tower-claim-time"));
+        saveConfig();
     }
 
     private enum RegisterType {COMMAND, LISTENER}

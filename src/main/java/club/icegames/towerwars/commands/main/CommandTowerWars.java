@@ -1,5 +1,6 @@
 package club.icegames.towerwars.commands.main;
 
+import club.icegames.towerwars.commands.main.sub.SubCreateGame;
 import club.icegames.towerwars.commands.main.sub.SubSettings;
 import club.icegames.towerwars.core.Locale;
 import games.negative.framework.command.Command;
@@ -14,7 +15,8 @@ public class CommandTowerWars extends Command {
 
     public CommandTowerWars() {
         this.addSubCommands(
-                 new SubSettings()
+                 new SubSettings(),
+                new SubCreateGame()
         );
     }
 
