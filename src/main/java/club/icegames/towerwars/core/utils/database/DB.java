@@ -12,7 +12,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Throwables;
 import com.google.common.collect.*;
-import io.lumine.mythic.bukkit.utils.storage.sql.hikari.HikariDataSource;
+import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.*;
 import java.time.Instant;
