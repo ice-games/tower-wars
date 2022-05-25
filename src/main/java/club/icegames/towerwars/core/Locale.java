@@ -47,6 +47,9 @@ import java.util.*;
         )),
         SET_LIVES("SET_LIVES", listFromLines(
                 "&c&l(!)&c Successfully set lives!"
+        )),
+        INVALID_PLAYER("INVALID_PLAYER", listFromLines(
+                "&c&l(!)&c Invalid player!"
         ));
 
         private final String id;
