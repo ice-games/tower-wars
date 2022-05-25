@@ -1,5 +1,6 @@
 package club.icegames.towerwars;
 
+import club.icegames.towerwars.commands.main.CommandTowerWars;
 import club.icegames.towerwars.core.Locale;
 import club.icegames.towerwars.core.Logger;
 import club.icegames.towerwars.game.Game;
@@ -26,6 +27,12 @@ public final class TowerWarsPlugin extends BasePlugin {
     private final HashMap<Player, Game> inGame = new HashMap<>();
     @Getter
     private final ArrayList<Player> queue = new ArrayList<>();
+    @Getter
+    @Setter
+    private int lives = 3;
+    @Getter
+    @Setter
+    private int towerCaptureTime = 7;
 
     @Override
     public void onEnable() {
@@ -48,6 +55,10 @@ public final class TowerWarsPlugin extends BasePlugin {
         Locale.init(this);
         saveDefaultConfig();
 
+        // Set lives
+        setLives(getConfig().getInt("game.lives"));
+        setTowerCaptureTime(getConfig().getInt("game.tower-claim-time"));
+
         long finish = System.currentTimeMillis() - start;
         Logger.log(Logger.LogLevel.SUCCESS, "Started in " + finish + "ms!");
     }
@@ -61,6 +72,7 @@ public final class TowerWarsPlugin extends BasePlugin {
             case COMMAND:
                 registerCommands(
                         // Insert commands
+                        new CommandTowerWars()
                 );
                 break;
             case LISTENER:
@@ -70,18 +82,24 @@ public final class TowerWarsPlugin extends BasePlugin {
         }
     }
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
-
     /**
      * Checks if a player is in a game
      * @param p The player you wish to check
      * @return A boolean defining whether the player is in a game.
+     * @author Seailz
      */
     public boolean inGame(Player p) {
         return inGame.containsKey(p);
     }
+
+    /**
+     * Refreshes everything
+     * @author Seailz
+     */
+    public void refresh() {
+        setLives(getConfig().getInt("game.lives"));
+        setTowerCaptureTime(getConfig().getInt("game.tower-claim-time"));
+    }
+
     private enum RegisterType {COMMAND, LISTENER}
 }

@@ -6,3 +6,7 @@ mysql:
   name: "a_good_old_database"
   password: "seailz"
   username: "not_seailz"
+
+game:
+  lives: 3
+  tower-claim-time: 7 # Time (in seconds) that it takes to claim a tower

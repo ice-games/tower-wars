@@ -41,6 +41,15 @@ import java.util.*;
         )),
         PLAYER_DEATH("PLAYER_DEATH", listFromLines(
                 "&c&l(!) &c%player% just died!"
+        )),
+        ENTER_VALID_NUMBER("ENTER_VAID_NUMBER", listFromLines(
+                "&c&l(!)&c Please enter a valid number!"
+        )),
+        SET_LIVES("SET_LIVES", listFromLines(
+                "&c&l(!)&c Successfully set lives!"
+        )),
+        INVALID_PLAYER("INVALID_PLAYER", listFromLines(
+                "&c&l(!)&c Invalid player!"
         ));
 
         private final String id;
