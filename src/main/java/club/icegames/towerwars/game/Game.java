@@ -9,6 +9,7 @@ import club.icegames.towerwars.core.utils.Schematic;
 import club.icegames.towerwars.core.utils.database.DB;
 import club.icegames.towerwars.core.utils.database.Row;
 import club.icegames.towerwars.core.utils.database.Table;
+import club.icegames.towerwars.core.world.EmptyChunkGenerator;
 import games.negative.framework.util.Task;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.channels.NetworkChannel;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -44,11 +46,6 @@ public class Game {
 
         players.add(teamOne.getPlayer());
         players.add(teamTwo.getPlayer());
-
-        players.forEach(player -> {
-            if (TowerWarsPlugin.getInstance().getInGame().containsKey(player)) moveOn.set(false);
-            players.add(player);
-        });
 
         if (!moveOn.get())
             throw new PlayerIsAlreadyInGameException("One of the current players is already in a game!");
@@ -93,11 +90,18 @@ public class Game {
     /**
      * Creates the world for the game
      * @author Seailz
+     * @param use118 Whether we should use the 1.18 world creation
      */
-    private void createWorld() {
+    private void createWorld(boolean use118) {
+        if (!use118) {
+            WorldCreator wc = new WorldCreator(getUuid().toString());
+            wc.type(WorldType.FLAT);
+            wc.generatorSettings("2;0;1;");
+            setWorld(wc.createWorld());
+            return;
+        }
         WorldCreator wc = new WorldCreator(getUuid().toString());
-        wc.type(WorldType.FLAT);
-        wc.generatorSettings("2;0;1;");
+        wc.generator(new EmptyChunkGenerator()); //The chunk generator from step 1
         setWorld(wc.createWorld());
     }
 
@@ -116,22 +120,21 @@ public class Game {
      * Starts the game
      * @author Seailz
      */
-    public void start() {
+    public void start() throws IOException {
         AtomicBoolean moveOn = new AtomicBoolean(true);
         players.forEach(player -> {
             if (TowerWarsPlugin.getInstance().getInGame().containsKey(player)) moveOn.set(false);
         });
         if (!moveOn.get()) return;
 
-        Locale.GENERATING_WORLD.send(players);
+        sendMessageToAll(Locale.LOADING);
         setState(GameState.GENERATING_WORLD);
-        createWorld();
-        Locale.WORLD_GENERATED.send(players);
+        createWorld(TowerWarsPlugin.getInstance().getConfig().getBoolean("use118"));
         setState(GameState.PASTING);
         spawnSchemtatic();
         setState(GameState.STARTING);
-        Locale.SCHEMATIC_PASTED.send(players);
         teleport();
+        sendMessageToAll(Locale.LOADED);
         Locale.INTRO.send(players);
 
         new Countdown(teamOne.getPlayer());
@@ -207,7 +210,7 @@ public class Game {
      * Pastes a random schematic
      * @author Seailz
      */
-    private void spawnSchemtatic() {
+    private void spawnSchemtatic() throws IOException {
         File folder = new File(TowerWarsPlugin.getInstance().getDataFolder() + "/schematics");
         ArrayList<File> schematics = new ArrayList<>();
 
@@ -219,6 +222,12 @@ public class Game {
         Arrays.stream(folder.listFiles()).forEach(file -> {
             if (isSchematic(file)) schematics.add(file);
         });
+
+        if (schematics.isEmpty()) {
+            sendMessageToAll(Locale.NO_SCHEMS_FOUND);
+            deleteWorld();
+            return;
+        }
 
         File schematic = (File) getRandomFromArray(schematics);
         Location loc = new Location(world, 0, 0, 0);
@@ -283,4 +292,7 @@ public class Game {
     }
 
     public enum Team {ONE, TWO;}
+    private void sendMessageToAll(Locale locale) {
+        players.forEach(locale::send);
+    }
 }
