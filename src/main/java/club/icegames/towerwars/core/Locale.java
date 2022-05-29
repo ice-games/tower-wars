@@ -19,8 +19,11 @@ import java.util.*;
     @Getter
     public enum Locale {
 
-        ERROR_INVALID_PLAYER("error.invalidplayer", Collections.singletonList("&c&lERROR&f That player is invalid!")),
-        GENERATING_WORLD("WORLD_GENERATING", listFromLines(
+    ERROR_INVALID_PLAYER("error.invalidplayer", Collections.singletonList("&c&lERROR&f That player is invalid!")),
+    LOADING("LOADING", listFromLines(
+            "&c&l(!)&c Loading..."
+    )),
+        /* GENERATING_WORLD("WORLD_GENERATING", listFromLines(
                 "&c&l(!) &cGame has been initialized, generating world..."
         )),
         WORLD_GENERATED("WORLD_GENERATED", listFromLines(
@@ -31,6 +34,9 @@ import java.util.*;
         )),
         TELEPORTED("TELEPORTED", listFromLines(
                 "&c&l(!) &cTeleported!"
+        )), */
+        LOADED("LOADED", listFromLines(
+                "&c&l(!)&c Loaded!"
         )),
         INTRO("INTRO", listFromLines(
                 "&c&l                   TOWER WARS",
@@ -53,6 +59,9 @@ import java.util.*;
         )),
         INVALID_PLAYER("INVALID_PLAYER", listFromLines(
                 "&c&l(!)&c Invalid player!"
+        )),
+        NO_SCHEMS_FOUND("NO_SCHEMATICS_FOUND", listFromLines(
+                "&c&l(!)&c No schematics found! Deleting world..."
         ));
 
         private final String id;

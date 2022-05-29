@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -20,10 +21,14 @@ public class QueueWatcher {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(TowerWarsPlugin.getInstance(), () -> {
             if (TowerWarsPlugin.getInstance().getQueue().size() >= 2) {
 
-                new GameBuilder(
-                        TowerWarsPlugin.getInstance().getQueue().get(0),
-                        TowerWarsPlugin.getInstance().getQueue().get(1)
-                ).build();
+                try {
+                    new GameBuilder(
+                            TowerWarsPlugin.getInstance().getQueue().get(0),
+                            TowerWarsPlugin.getInstance().getQueue().get(1)
+                    ).build();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 TowerWarsPlugin.getInstance().getQueue().remove(0);
                 TowerWarsPlugin.getInstance().getQueue().remove(1);

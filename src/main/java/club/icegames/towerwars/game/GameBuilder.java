@@ -6,6 +6,7 @@ import lombok.Getter;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameBuilder {
@@ -27,6 +28,6 @@ public class GameBuilder {
         }
     }
 
-    public void build() { game.start(); }
+    public void build() throws IOException { game.start(); }
 
 }
