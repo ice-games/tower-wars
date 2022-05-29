@@ -1,5 +1,6 @@
 package club.icegames.towerwars.game;
 
+import club.icegames.towerwars.TowerWarsPlugin;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.ChatColor;
@@ -21,5 +22,8 @@ public class SingleTeam {
     public SingleTeam(@NotNull Player player, @NotNull ChatColor color) {
         this.player = player;
         this.color = color;
+
+        TowerWarsPlugin.getInstance().refresh();
+        setLives(TowerWarsPlugin.getInstance().getLives());
     }
 }
