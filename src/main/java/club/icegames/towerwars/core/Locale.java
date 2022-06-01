@@ -35,32 +35,35 @@ import java.util.*;
         TELEPORTED("TELEPORTED", listFromLines(
                 "&c&l(!) &cTeleported!"
         )), */
-        LOADED("LOADED", listFromLines(
+        LOADED("GAME.LOADED", listFromLines(
                 "&c&l(!)&c Loaded!"
         )),
-        INTRO("INTRO", listFromLines(
+        INTRO("GAME.INTRO", listFromLines(
                 "&c&l                   TOWER WARS",
                 "&7Capture all the towers by standing on their &egold block&7 for 7 seconds!",
                 "         &7First one to capture all the towers wins!",
                 " &7Beware of the big towers, once captured they will start attacking the other",
                 "&7             team with arrows! Good luck..."
         )),
-        PLAYER_DEATH("PLAYER_DEATH", listFromLines(
+        PLAYER_DEATH("GAME.DEATH", listFromLines(
                 "&c&l(!) &c%player% just died!"
         )),
-        ENTER_VALID_NUMBER("ENTER_VAID_NUMBER", listFromLines(
+        ENTER_VALID_NUMBER("INVALID.NUMBER", listFromLines(
                 "&c&l(!)&c Please enter a valid number!"
         )),
-        SET_LIVES("SET_LIVES", listFromLines(
+        SET_LIVES("SET.LIVES", listFromLines(
                 "&c&l(!)&c Successfully set lives!"
         )),
-        SET_TIME("SET_TIME", listFromLines(
-                "&c&l(!)&c Successfully set capture time"
+        SET_TIME("SET.TIME", listFromLines(
+                "&c&l(!)&c Successfully set capture time!"
         )),
-        INVALID_PLAYER("INVALID_PLAYER", listFromLines(
+        SET_SPAWN("SET.SPAWN", listFromLines(
+                "&c&l(!)&c Successfully set spawn location to your location!"
+        )),
+        INVALID_PLAYER("INVALID.PLAYER", listFromLines(
                 "&c&l(!)&c Invalid player!"
         )),
-        NO_SCHEMS_FOUND("NO_SCHEMATICS_FOUND", listFromLines(
+        NO_SCHEMS_FOUND("INVALID.NO_SCHEMATICS", listFromLines(
                 "&c&l(!)&c No schematics found! Deleting world..."
         ));
 

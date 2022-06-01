@@ -34,7 +34,6 @@ public class SettingsGUI extends GUI {
         );
         lives.setItemMeta(meta);
 
-        // TODO: change the texture
         ItemStack timeToClaim = CustomSkull.of("https://textures.minecraft.net/texture/76fdd4b13d54f6c91dd5fa765ec93dd9458b19f8aa34eeb5c80f455b119f278").getItemStack();
         ItemMeta timeToClaimMeta = timeToClaim.getItemMeta();
         timeToClaimMeta.setDisplayName(Utils.color("&a&lTower Capture Time"));
@@ -50,7 +49,19 @@ public class SettingsGUI extends GUI {
         );
         timeToClaim.setItemMeta(timeToClaimMeta);
 
-        this.setItemClickEvent(12, player -> timeToClaim, (player, event) -> {
+        ItemStack spawn = CustomSkull.of("https://textures.minecraft.net/texture/63261e1642f2eaa6f3e335c05940e2a78cf9aefe90d48c7960c7337f14227ec8").getItemStack();
+        ItemMeta spawnMeta = spawn.getItemMeta();
+        spawnMeta.setDisplayName(Utils.color("&b&lSpawn Location"));
+        spawnMeta.setLore(
+                Locale.listFromLines(
+                        Utils.color(
+                                "&8Click to set location"
+                        )
+                )
+        );
+        spawn.setItemMeta(spawnMeta);
+
+        this.setItemClickEvent(10, player -> timeToClaim, (player, event) -> {
             player.closeInventory();
             player.sendTitle(Utils.color("&b&lEnter an amount of seconds"), Utils.color(
                     "&7Please enter &bexit&7 if you would like to exit"
@@ -76,7 +87,7 @@ public class SettingsGUI extends GUI {
             });
         });
 
-        this.setItemClickEvent(14, player -> lives, (player, event) -> {
+        this.setItemClickEvent(16, player -> lives, (player, event) -> {
             player.closeInventory();
             player.sendTitle(Utils.color("&b&lEnter a number"), Utils.color(
                     "&7Please enter &bexit&7 if you would like to exit"
@@ -100,6 +111,12 @@ public class SettingsGUI extends GUI {
 
                 response.setCancelled(true);
             });
+        });
+
+        this.setItemClickEvent(16, player -> lives, (player, event) -> {
+            player.closeInventory();
+            TowerWarsPlugin.getInstance().getConfig().set("game.spawn", player.getLocation());
+            Locale.SET_SPAWN.send(player);
         });
     }
 
