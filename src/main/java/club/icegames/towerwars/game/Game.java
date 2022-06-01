@@ -16,6 +16,7 @@ import lombok.Setter;
 import org.apache.commons.io.FileUtils;
 import club.icegames.towerwars.core.*;
 import org.bukkit.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +40,10 @@ public class Game {
     private final UUID uuid;
     @Setter
     private GameState state;
+    @Setter
+    private Player winner;
+    @Setter
+    private FileConfiguration config;
 
     public Game(@NotNull SingleTeam teamOne, @NotNull SingleTeam teamTwo) throws PlayerIsAlreadyInGameException {
 
@@ -135,6 +140,7 @@ public class Game {
         setState(GameState.STARTING);
         teleport();
         sendMessageToAll(Locale.LOADED);
+        // TODO: use sendmessagetoall method here
         Locale.INTRO.send(players);
 
         new Countdown(teamOne.getPlayer());
@@ -147,10 +153,9 @@ public class Game {
     /**
      * Ends the game
      * @author Seailz
-     * @param winner the winner of the game
      * @throws NoOneLostException if no-one lost
      */
-    public void end(Player winner) throws NoOneLostException {
+    public void end() throws NoOneLostException {
         setState(GameState.ENDED);
         try {
             deleteWorld();
@@ -162,43 +167,11 @@ public class Game {
 
         // MYSQL stuff
         if (TowerWarsPlugin.getInstance().getConfig().getBoolean("mysql.enabled")) {
-            DB db = new DB(
-                        TowerWarsPlugin.getInstance().getConfig().getString("mysql.ip")
-                        + TowerWarsPlugin.getInstance().getConfig().getString("mysql.port"),
-                        TowerWarsPlugin.getInstance().getConfig().getString("mysql.username"),
-                        TowerWarsPlugin.getInstance().getConfig().getString("mysql.password"),
-                        TowerWarsPlugin.getInstance().getConfig().getString("mysql.name")
-                    );
-
-            AtomicBoolean tableExists = new AtomicBoolean(false);
-            db.getTables().forEach(table -> {
-                if (table.equals("WEB_TRACK")) tableExists.set(true);
-            });
-
-            if (!tableExists.get()) {
-                db.addTable(new Table("WEB_TRACK")
-                        .idColumn()
-                        .column("id", String.class)
-                        .column("winner", String.class)
-                        .column("lost", String.class));
-            }
-
-            Table table = new Table("WEB_TRACK");
-            Player lost = null;
-
-            if (getTeamTwo().getPlayer().equals(winner)) lost = getTeamOne().getPlayer();
-            if (getTeamOne().getPlayer().equals(winner)) lost = getTeamTwo().getPlayer();
-
-            if (lost == null) throw new NoOneLostException("This is weird, no one lost!");
-
-            db.insert("WEB_TRACK",
-                    new Row()
-                            .with("id", getUuid().toString())
-                            .with("winner", winner.getName())
-                            .with("lost", lost.getName())
-                        );
+            setWinner(winner);
+            save();
         }
-        // TODO: Teleport players to spawn
+        // Teleport all players to spawn
+        getPlayers().forEach(this::teleportToSpawn);
     }
 
     // TODO: Claiming Towers
@@ -291,8 +264,62 @@ public class Game {
         p.setGameMode(GameMode.CREATIVE);
     }
 
+    /**
+     * Teleports a player to spawn
+     * @author Seailz
+     * @param p The player you would like to teleport
+     */
+    protected void teleportToSpawn(Player p) {
+        p.teleport(
+                TowerWarsPlugin.getInstance().getConfig().getLocation(
+                        "game.spawn"
+                )
+        );
+    }
+
+    private void save() throws NoOneLostException {
+        DB db = new DB(
+                TowerWarsPlugin.getInstance().getConfig().getString("mysql.ip")
+                        + TowerWarsPlugin.getInstance().getConfig().getString("mysql.port"),
+                TowerWarsPlugin.getInstance().getConfig().getString("mysql.username"),
+                TowerWarsPlugin.getInstance().getConfig().getString("mysql.password"),
+                TowerWarsPlugin.getInstance().getConfig().getString("mysql.name")
+        );
+
+        AtomicBoolean tableExists = new AtomicBoolean(false);
+        db.getTables().forEach(table -> {
+            if (table.equals("WEB_TRACK")) tableExists.set(true);
+        });
+
+        if (!tableExists.get()) {
+            db.addTable(new Table("WEB_TRACK")
+                    .idColumn()
+                    .column("id", String.class)
+                    .column("winner", String.class)
+                    .column("lost", String.class));
+        }
+
+        Player lost = null;
+
+        if (getTeamTwo().getPlayer().equals(winner)) lost = getTeamOne().getPlayer();
+        if (getTeamOne().getPlayer().equals(winner)) lost = getTeamTwo().getPlayer();
+
+        if (lost == null) throw new NoOneLostException("This is weird, no one lost!");
+
+        db.insert("WEB_TRACK",
+                new Row()
+                        .with("id", getUuid().toString())
+                        .with("winner", winner.getName())
+                        .with("lost", lost.getName())
+        );
+    }
+
     public enum Team {ONE, TWO;}
     private void sendMessageToAll(Locale locale) {
         players.forEach(locale::send);
+    }
+
+    private void saveConfig() {
+        TowerWarsPlugin.getInstance().saveConfig();
     }
 }
