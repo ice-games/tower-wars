@@ -141,7 +141,7 @@ public class Game {
         teleport();
         sendMessageToAll(Locale.LOADED);
         // TODO: use sendmessagetoall method here
-        Locale.INTRO.send(players);
+        sendMessageToAll(Locale.INTRO);
 
         new Countdown(teamOne.getPlayer());
         new Countdown(teamTwo.getPlayer());
