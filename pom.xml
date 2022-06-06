@@ -100,7 +100,7 @@
         <dependency>
             <groupId>com.github.Negative-Games</groupId>
             <artifactId>Framework</artifactId>
-            <version>2.2.0-BETA</version>
+            <version>2.2.0-BETA-3</version>
             <scope>compile</scope>
         </dependency>
         <!--- LOMBOK <3 -->
