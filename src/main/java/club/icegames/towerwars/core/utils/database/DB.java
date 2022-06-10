@@ -12,7 +12,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Stopwatch;
 import com.google.common.base.Throwables;
 import com.google.common.collect.*;
-import com.zaxxer.hikari.HikariDataSource;
+// import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.*;
 import java.time.Instant;
@@ -39,7 +39,7 @@ public class DB {
    */
   public static final String NULL = "ez.DB.NULL";
 
-  private final HikariDataSource source;
+  // private final HikariDataSource source;
   protected final ThreadLocal<Connection> transactionConnections = new ThreadLocal<>();
 
   public final String host, user, pass;
@@ -52,7 +52,7 @@ public class DB {
     host = user = pass = "";
     this.schema = schema;
     ssl = false;
-    source = null;
+    // source = null;
     this.maxConnections = 10;
   }
 
@@ -88,13 +88,13 @@ public class DB {
     // url += "&serverTimezone=UTC";
     url += "&characterEncoding=utf8";
 
-    source = new HikariDataSource();
+    /* source = new HikariDataSource();
     source.setJdbcUrl(url);
     source.setUsername(user);
     source.setPassword(pass);
     source.setMaximumPoolSize(maxConnections);
     // source.setConnectionInitSql("SET NAMES utf8mb4");
-    source.setAutoCommit(true);
+    source.setAutoCommit(true); */
   }
 
   /**
@@ -822,7 +822,7 @@ public class DB {
       return ret;
     }
     try {
-      return source.getConnection();
+      return null; //source.getConnection();
     } catch (Exception e) {
       throw propagate(e);
     }
@@ -832,7 +832,7 @@ public class DB {
    * Closes all connections to this database. Future queries using this DB object will fail.
    */
   public void shutdown() {
-    source.close();
+    // source.close();
   }
 
   private static final Set<Class<?>> whitelist = Sets.newHashSet(Number.class, String.class, Boolean.class);

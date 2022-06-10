@@ -120,7 +120,7 @@ import java.util.*;
         }
 
         public static List<String> listFromLines(String... s) {
-            return new ArrayList<>(List.of(s));
+            return new ArrayList<>(Arrays.asList(s));
         }
 
     }
